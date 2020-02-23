@@ -51,5 +51,28 @@ public class SnakeGame {
         return tailArray;
     }
 
+    public int[] findTailRecursive(){
+
+    }
+
+    public int[][] findTailRecursive(int[] currentPosition, int[] previousPosition){
+
+    }
+
+    private void resetCounters()({
+        exhaustiveChecks = 0;
+        recursiveChecks = 0;
+    }
+
+    private static int getRecursiveChecks(){
+
+        return recursiveChecks;
+    }
+
+    private static int getExhaustiveChecks(){
+
+        return exhaustiveChecks;
+    }
+
 
 }
