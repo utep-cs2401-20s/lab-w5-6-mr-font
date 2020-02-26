@@ -12,49 +12,81 @@ public class SnakeGame {
 
     public void SnakeHead(boolean[][] b, int x, int y){
 
+        for(int i =0; i < b.length; i++){
+            for(int j = 0; j < b[0].length; j++){
+                game[i][i] = b[i][j];
+            }
+        }
+
+        headPosition[0] = 
+
+    }
+
+    public boolean neighbors (int c, int r){
+       int count = 0;
+
+
     }
 
     public int[] findTailExhaustive(){
 
-        int counter = 0;
+        //exhaustiveChecks = 0;
+
+        resetCounters();
+
         int length= 0;
         int tailArray[] = {0,0,0};
 
         for(int i = 0; i < game.length; i++){
             for (int j = 0; j <game[0].length; j++){
+                exhaustiveChecks++;
 
-                if(i == headPosition[0] && j == headPosition[1]){
 
+
+                if(game[i][j]){
+                    if(i == headPosition[0] && j == headPosition[1]){
+                        length++;
+                        continue;
+                    }
                     length++;
-                    counter++;
-                    //continue;
-                }
-
-                if(game[i][j] == true){
-                  length++;
-                  counter++;
-                  if(game[i+1][j] == true && !game[i-1][j] && !game[i][j+1] && !game[i][j-1] || game[i][j+1] == true && !game[i+1][j] && !game[i-1][j] && !game[i][j-1] || game[i][j-1] == true && !game[i][j+1] && !game[i+1][j] && !game[i-1][j] || game[i-1][j] == true && !game[i+1][j] && !game[i][j+1] && !game[i][j-1] ){
-                      tailArray[0] = i;
-                      tailArray[1] = j;
-                  }
+                    //todo: check if i+/i-, j+/j- is off the board
+                    //
+                    //if
+                    if(game[i+1][j] && !game[i-1][j] && !game[i][j+1] && !game[i][j-1] || game[i][j+1] == true && !game[i+1][j] && !game[i-1][j] && !game[i][j-1] || game[i][j-1] == true && !game[i][j+1] && !game[i+1][j] && !game[i-1][j] || game[i-1][j] == true && !game[i+1][j] && !game[i][j+1] && !game[i][j-1] ){
+                        tailArray[0] = i;
+                        tailArray[1] = j;
+                    }
                   //if(i > 0 && i < game.length -1 && j > 0 && j < game[0].length){
                      // if(){}
                     //}
-
                 }
-                counter++;
+
 
             }
         }
 
-        tailArray[2] = counter;
+        tailArray[2] = length;
         return tailArray;
     }
 
     public int[] findTailRecursive(){
 
+        resetCounters();
+
+        //int i = headPosition[0];
+        //int j = headPosition[1];
+
+        //Base case
+        //if(game[i+1][j] == true && !game[i-1][j] && !game[i][j+1] && !game[i][j-1] && i != headPosition[0] && j != headPosition[1] || game[i][j+1] == true && !game[i+1][j] && !game[i-1][j] && !game[i][j-1] && i != headPosition[0] && j != headPosition[1] || game[i][j-1] == true && !game[i][j+1] && !game[i+1][j] && !game[i-1][j] && i != headPosition[0] && j != headPosition[1] || game[i-1][j] == true && !game[i+1][j] && !game[i][j+1] && !game[i][j-1] && i != headPosition[0] && j != headPosition[1]){
+
+        return findTailRecursive();
+            
+        }
+
     }
 
+
+    //@Override
     public int[][] findTailRecursive(int[] currentPosition, int[] previousPosition){
 
     }
