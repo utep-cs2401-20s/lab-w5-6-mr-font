@@ -68,7 +68,7 @@ public class SnakeGame {
         boolean tailFound = false;
 
         for(int i = 0; i < game.length; ++i){
-            for (int j = 0; j <game[0].length; j++){
+            for (int j = 0; j <game[0].length; ++j){
 
                 if(!tailFound){
                   exhaustiveChecks++;
