@@ -83,9 +83,10 @@ public class SnakeGame {
                       }
 
                   }
+
+                }
                 if(game[i][j]){
                     length++;
-                }
 
             }
         }
