@@ -14,17 +14,39 @@ public class SnakeGame {
 
         for(int i =0; i < b.length; i++){
             for(int j = 0; j < b[0].length; j++){
-                game[i][i] = b[i][j];
+                game[i][j] = b[i][j];
             }
         }
 
-        headPosition[0] = 
+        headPosition[0] = x;
+        headPosition[1] = y;
 
     }
 
-    public boolean neighbors (int c, int r){
+    public boolean neighbors (int r, int c){
        int count = 0;
 
+       for(int i = r-1; i < r+2; ++i){
+           for(int j = c-1; j < c +2; ++j){
+
+               if(i < 0 || i > game.length || j < 0 || j> game.length){
+                   continue;
+               }
+
+               if(i + j < (r + c) -1 || i + j == r + c || i + c > (r + c) + 1){
+                   continue;
+               }
+
+               if(game[i][j]){
+                   count++;
+               }
+           }
+       }
+
+       if(count == 1){
+           return true;
+       }
+       return false;
 
     }
 
@@ -37,30 +59,33 @@ public class SnakeGame {
         int length= 0;
         int tailArray[] = {0,0,0};
 
+        boolean tailFound = false;
+
         for(int i = 0; i < game.length; i++){
             for (int j = 0; j <game[0].length; j++){
-                exhaustiveChecks++;
+
+                if(!tailFound){
+                  exhaustiveChecks++;
 
 
 
+                  if(game[i][j]){
+                      length++;
+                      if(i == headPosition[0] && j == headPosition[1]){
+
+                          continue;
+                      }
+                      //length++;
+                      if(neighbors(i,j)){
+                          tailArray[0] = i;
+                          tailArray[1] = j;
+                          tailFound = true;
+                      }
+
+                  }
                 if(game[i][j]){
-                    if(i == headPosition[0] && j == headPosition[1]){
-                        length++;
-                        continue;
-                    }
                     length++;
-                    //todo: check if i+/i-, j+/j- is off the board
-                    //
-                    //if
-                    if(game[i+1][j] && !game[i-1][j] && !game[i][j+1] && !game[i][j-1] || game[i][j+1] == true && !game[i+1][j] && !game[i-1][j] && !game[i][j-1] || game[i][j-1] == true && !game[i][j+1] && !game[i+1][j] && !game[i-1][j] || game[i-1][j] == true && !game[i+1][j] && !game[i][j+1] && !game[i][j-1] ){
-                        tailArray[0] = i;
-                        tailArray[1] = j;
-                    }
-                  //if(i > 0 && i < game.length -1 && j > 0 && j < game[0].length){
-                     // if(){}
-                    //}
                 }
-
 
             }
         }
