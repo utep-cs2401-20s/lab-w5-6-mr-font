@@ -37,16 +37,16 @@ public class SnakeGame {
        for(int i = r-1; i < r+2; ++i){
            for(int j = c-1; j < c +2; ++j){
 
-               if(i < 0 || i > game.length || j < 0 || j> game.length){
+               if(i < 0 || i > game[0].length -1 || j < 0 || j > game.length-1){
                    continue;
                }
 
-               if(i + j < (r + c) -1 || i + j == r + c || i + c > (r + c) + 1){
+               if(i + j < (r + c) -1 || i + j == r + c || i + j > (r + c) + 1){
                    continue;
                }
 
                if(game[i][j]){
-                   count++;
+                   ++count;
                }
            }
        }
@@ -60,21 +60,13 @@ public class SnakeGame {
 
     public int[] findTailExhaustive() {
 
-        //exhaustiveChecks = 0;
-
-        //resetCounters();
-
-        //length= 0;
-        //int exhaustiveTailArray[] = {0,0,0};
-
         boolean tailFound = false;
 
-        for (int i = 0; i < game.length; ++i) {
-            for (int j = 0; j < game[0].length; ++j) {
+        for (int i = 0; i < game[0].length; ++i) {
+            for (int j = 0; j < game.length; ++j) {
 
                 if (!tailFound) {
                     ++exhaustiveChecks;
-
 
                     if (game[i][j]) {
                         ++exhaustiveLength;
@@ -82,7 +74,7 @@ public class SnakeGame {
 
                             continue;
                         }
-                        //length++;
+
                         if (neighbors(i, j)) {
                             exhaustiveTailArray[0] = i;
                             exhaustiveTailArray[1] = j;
@@ -91,6 +83,11 @@ public class SnakeGame {
 
                     }
 
+                }
+
+                //this is needed to continue counting the length of the snake after the tail is found.
+                if (game[i][j] && tailFound){
+                    ++exhaustiveLength;
                 }
 
             }
@@ -131,7 +128,7 @@ public class SnakeGame {
         for(int i = currentPosition[0]-1; i < currentPosition[0]+2; ++i){
             for(int j = currentPosition[1]-1; j < currentPosition[1] +2; ++j){
 
-                if(i < 0 || i > game.length || j < 0 || j > game.length){
+                if(i < 0 || i > game.length-1 || j < 0 || j > game.length-1){
                     continue;
                 }
 
