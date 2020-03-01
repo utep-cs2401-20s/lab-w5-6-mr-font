@@ -11,15 +11,17 @@ public class SnakeGame {
 
     //default constructor:
     public SnakeGame(){
-        game = new boolean[1][1];
+        this.game = new boolean[1][1];
     }
 
 
 
     public void SnakeHead(boolean[][] b, int x, int y){
 
-        for(int i =0; i < b.length; i++){
-            for(int j = 0; j < b[0].length; j++){
+        this.game = new boolean[b[0].length][b.length];
+
+        for(int i = 0; i < b.length; ++i){
+            for(int j = 0; j < b[0].length; ++j){
                 game[i][j] = b[i][j];
             }
         }
@@ -56,48 +58,46 @@ public class SnakeGame {
 
     }
 
-    public int[] findTailExhaustive(){
+    public int[] findTailExhaustive() {
 
         //exhaustiveChecks = 0;
 
-        resetCounters();
+        //resetCounters();
 
-         //length= 0;
+        //length= 0;
         //int exhaustiveTailArray[] = {0,0,0};
 
         boolean tailFound = false;
 
-        for(int i = 0; i < game.length; ++i){
-            for (int j = 0; j <game[0].length; ++j){
+        for (int i = 0; i < game.length; ++i) {
+            for (int j = 0; j < game[0].length; ++j) {
 
-                if(!tailFound){
-                  exhaustiveChecks++;
+                if (!tailFound) {
+                    ++exhaustiveChecks;
 
 
+                    if (game[i][j]) {
+                        ++exhaustiveLength;
+                        if (i == headPosition[0] && j == headPosition[1]) {
 
-                  if(game[i][j]){
-                      exhaustiveLength++;
-                      if(i == headPosition[0] && j == headPosition[1]){
+                            continue;
+                        }
+                        //length++;
+                        if (neighbors(i, j)) {
+                            exhaustiveTailArray[0] = i;
+                            exhaustiveTailArray[1] = j;
+                            tailFound = true;
+                        }
 
-                          continue;
-                      }
-                      //length++;
-                      if(neighbors(i,j)){
-                          exhaustiveTailArray[0] = i;
-                          exhaustiveTailArray[1] = j;
-                          tailFound = true;
-                      }
-
-                  }
+                    }
 
                 }
-                if(game[i][j]){
-                    exhaustiveLength++;
 
             }
-        }
 
-            exhaustiveTailArray[2] = exhaustiveLength;
+
+        }
+        exhaustiveTailArray[2] = exhaustiveLength;
         return exhaustiveTailArray;
     }
 
@@ -113,7 +113,7 @@ public class SnakeGame {
 
         return findTailRecursive(headPosition, headPosition);
             
-        }
+        //}
 
     }
 
