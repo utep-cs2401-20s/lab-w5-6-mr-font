@@ -13,7 +13,7 @@ class SnakeGameTest {
     //Result: The method passed the test with the given values, and given board.
     public void testFindTailExhaustive1(){
 
-      SnakeGame test = new SnakeGame();
+      SnakeGame testEx1 = new SnakeGame();
       boolean[][] boardA = {{false,false,false,false,false,false,false,false},
                            {false,false,true,false,false,false,false,false},
                            {false,false,true,false,false,false,false,false},
@@ -29,9 +29,9 @@ class SnakeGameTest {
       int y = 1;
       int x = 2;
 
-      test.SnakeHead(boardA, y, x);
+      testEx1.SnakeHead(boardA, y, x);
 
-      assertArrayEquals(tailLocation, test.findTailExhaustive());
+      assertArrayEquals(tailLocation, testEx1.findTailExhaustive());
 
 
     }
@@ -43,7 +43,7 @@ class SnakeGameTest {
     //Result: The method passed the test with the given values, and given board.
     public void testFindTailExhaustive2(){
 
-        SnakeGame test2 = new SnakeGame();
+        SnakeGame testEx2 = new SnakeGame();
         boolean[][] boardB = {{true,true,true,true,false,false,false,false},
                               {false,false,false,false,false,false,false,false},
                               {false,false,false,false,false,false,false,false},
@@ -59,9 +59,9 @@ class SnakeGameTest {
         int y = 0;
         int x = 0;
 
-        test2.SnakeHead(boardB, y,x);
+        testEx2.SnakeHead(boardB, y,x);
 
-        assertArrayEquals(tailLocation, test2.findTailExhaustive());
+        assertArrayEquals(tailLocation, testEx2.findTailExhaustive());
 
 
     }
@@ -75,7 +75,7 @@ class SnakeGameTest {
     //Result: The method passed the test with the given values, and given board.
     public void testFindTailExhaustive3(){
 
-        SnakeGame test3 = new SnakeGame();
+        SnakeGame testEx3 = new SnakeGame();
         boolean[][] boardC = {{true,true,true,true,true,true,true,true},
                               {false,false,false,false,false,false,false,true},
                               {false,false,false,false,false,false,false,true},
@@ -91,9 +91,9 @@ class SnakeGameTest {
         int y = 0;
         int x = 0;
 
-        test3.SnakeHead(boardC, y, x);
+        testEx3.SnakeHead(boardC, y, x);
 
-        assertArrayEquals(tailLocation, test3.findTailExhaustive());
+        assertArrayEquals(tailLocation, testEx3.findTailExhaustive());
 
 
     }
@@ -108,7 +108,7 @@ class SnakeGameTest {
     //The length of the snake is 6 cells, but the method returned a length of 7.
     public void testFindTailExhaustive4(){
 
-        SnakeGame test4 = new SnakeGame();
+        SnakeGame testEx4 = new SnakeGame();
         boolean[][] boardD = {{true,true,false,false},
                               {false,true,false,false},
                               {false,true,false,false},
@@ -121,9 +121,9 @@ class SnakeGameTest {
         int y = 3;
         int x = 2;
 
-        test4.SnakeHead(boardD, y, x);
+        testEx4.SnakeHead(boardD, y, x);
 
-        assertArrayEquals(tailLocation, test4.findTailExhaustive());
+        assertArrayEquals(tailLocation, testEx4.findTailExhaustive());
 
 
     }
@@ -139,7 +139,7 @@ class SnakeGameTest {
     //One way to fix it would be to change line 89 from: if (game[i][j] && tailFound), to: if (game[i][j] && tailFound && exhaustiveLength < 1)
     public void testFindTailExhaustive5(){
 
-        SnakeGame test5 = new SnakeGame();
+        SnakeGame testEx5 = new SnakeGame();
         boolean[][] boardE = {{true,true,true,true,false,false,false,false},
                               {false,false,false,true,false,false,false,false},
                               {false,false,false,true,false,false,false,false},
@@ -155,9 +155,9 @@ class SnakeGameTest {
         int y = 7;
         int x = 6;
 
-        test5.SnakeHead(boardE, y, x);
+        testEx5.SnakeHead(boardE, y, x);
 
-        assertArrayEquals(tailLocation, test5.findTailExhaustive());
+        assertArrayEquals(tailLocation, testEx5.findTailExhaustive());
 
 
     }
@@ -168,10 +168,10 @@ class SnakeGameTest {
 
 
     @org.junit.jupiter.api.Test
-    //First test case. This one is a soft ball, as all parts of the snake are in the middle of the board, so our methods don't have to worry about out of bounds indexes.
-    //This easy test will give us a good baseline for the tests to follow(and see if the code-as-written even works, even of the simplest test case).
+    //First Recursive test case. Same board as exhaustive test number 2.
+    // At this point, 2/29/2020, I'm out of time for doing the full set of tests, so I'm going to reuse the boards from the exhaustive test. I'm going to put in what work I can.
     //
-    //Result: The method passed the test with the given values, and given board.
+    //Result: The method failed with a buffer overflow.
     public void testFindTailRecursive1(){
 
         SnakeGame testRecA = new SnakeGame();
@@ -192,7 +192,67 @@ class SnakeGameTest {
 
         testRecA.SnakeHead(boardA, y, x);
 
-        assertArrayEquals(tailLocation, testRecA.findTailExhaustive());
+        assertArrayEquals(tailLocation, testRecA.findTailRecursive());
+
+
+    }
+
+    @org.junit.jupiter.api.Test
+    //Second recursive test case. Same board as exhaustive test number 2
+    //
+    //
+    //Result: The method passed the test with the given values, and given board.
+    public void testFindTailRecursive2(){
+
+        SnakeGame testRecB = new SnakeGame();
+        boolean[][] boardB = {{true,true,true,true,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false},
+                              {false,false,false,false,false,false,false,false}};
+
+        int[] tailLocation = {0,3,4};
+
+        //Head indexes
+        int y = 0;
+        int x = 0;
+
+        testRecB.SnakeHead(boardB, y, x);
+
+        assertArrayEquals(tailLocation, testRecB.findTailExhaustive());
+
+
+    }
+
+    @org.junit.jupiter.api.Test
+    //Second recursive test case. Same board as exhaustive test number 2
+    //
+    //
+    //Result: The method passed the test with the given values, and given board.
+    public void testFindTailRecursive3(){
+
+        SnakeGame testRecC = new SnakeGame();
+        boolean[][] boardC = {{true,true,true,true,true,true,true,true},
+                              {false,false,false,false,false,false,false,true},
+                              {false,false,false,false,false,false,false,true},
+                              {false,false,false,false,true,true,true,true},
+                              {false,false,false,false,true,false,false,false},
+                              {false,false,false,false,true,false,false,false},
+                              {false,false,false,false,true,false,false,false},
+                              {true,true,true,true,true,false,false,false}};
+
+        int[] tailLocation = {7,0,23};
+
+        //Head indexes
+        int y = 0;
+        int x = 0;
+
+        testRecC.SnakeHead(boardC, y, x);
+
+        assertArrayEquals(tailLocation, testRecC.findTailRecursive());
 
 
     }

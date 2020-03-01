@@ -66,10 +66,10 @@ public class SnakeGame {
             for (int j = 0; j < game.length; ++j) {
 
                 if (!tailFound) {
-                    ++exhaustiveChecks;
+                    exhaustiveChecks++;
 
                     if (game[i][j]) {
-                        ++exhaustiveLength;
+                       ++exhaustiveLength;
                         if (i == headPosition[0] && j == headPosition[1]) {
 
                             continue;
@@ -86,9 +86,11 @@ public class SnakeGame {
                 }
 
                 //this is needed to continue counting the length of the snake after the tail is found.
-                if (game[i][j] && tailFound){
-                    ++exhaustiveLength;
-                }
+                //It is needed for test testEx3 to work.
+                ///But, for some reason it interferes with the recursive method(!?!). ToDo FIX THIS
+                //if (game[i][j] && tailFound){
+                   // ++exhaustiveLength;
+                //}
 
             }
 
@@ -118,11 +120,10 @@ public class SnakeGame {
     //@Override
     public int[] findTailRecursive(int[] currentPosition, int[] previousPosition){
 
-        recursiveChecks++;
 
-        recursiveLength++;
+        ++recursiveChecks;
 
-
+        ++recursiveLength;
 
         //base case
         for(int i = currentPosition[0]-1; i < currentPosition[0]+2; ++i){
@@ -142,6 +143,11 @@ public class SnakeGame {
 
                 if(game[i][j]){
 
+                    if(i == previousPosition[0] && j == previousPosition[1]){
+                        continue;
+                    }
+
+                    System.out.println("check number: " + recursiveChecks + " " + "Length: " + recursiveLength + " I Location: " + currentPosition[0] + " J Location" + currentPosition[1]);
                     previousPosition[0] = currentPosition[0];
                     previousPosition[1] = currentPosition[1];
 
@@ -153,6 +159,7 @@ public class SnakeGame {
 
             }
         }
+
 
         recursiveTailArray[0] = currentPosition[0];
         recursiveTailArray[1] = currentPosition[1];
